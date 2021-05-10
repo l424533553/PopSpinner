@@ -84,7 +84,6 @@ class PopSpinner<T> : LinearLayout {
         tvValue.setOnClickListener(spinnerOnClickListener)
         btDropdown.setOnClickListener(spinnerOnClickListener)
 
-
         mSpinerPopWindow = PopWindow(mcontext)
         mAdapter = PopListAdapter<T>()
         mAdapter.setListener(object : PopSpinnerItemClickListener<T> {
@@ -92,18 +91,15 @@ class PopSpinner<T> : LinearLayout {
                 tvValue.text = value
                 listener?.onItemSelected(position, t, value)
             }
-
             override fun setContent(t: T): String {
                 val value = listener?.setContent(t)
                 return value ?: ""
             }
         })
-
     }
 
     /**
      * 设置控件是否可用
-     *
      * @param enable true:可用
      */
     fun setEnable(enable: Boolean) {
@@ -113,7 +109,6 @@ class PopSpinner<T> : LinearLayout {
 
     /**
      * 设置text
-     *
      * @param text 内容行需要设置的内容
      */
     fun setText(text: String) {
@@ -149,6 +144,7 @@ class PopSpinner<T> : LinearLayout {
     private fun showSpinWindow() {
         mAdapter.setDatas(mItems)
         mSpinerPopWindow.setAdatper(mAdapter)
+
         this.mSpinerPopWindow.width = view.width
         if (mItems == null || mItems?.size == 0) {
             this.mSpinerPopWindow.height = 0

@@ -57,8 +57,6 @@ class PopWindow<T>(private val mContext: Context) : PopupWindow(mContext) {
             }
         }
     }
-
-
 }
 
 
