@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 
-
 /**
  * @author 罗发新
  * 创建时间：2021/4/29  13:38
