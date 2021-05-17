@@ -24,11 +24,6 @@ class PopSpinner<T> : LinearLayout {
      */
     var listener: PopSpinnerItemClickListener<T>? = null
 
-    /**
-     * 下拉View是否已展开
-     */
-    var isShowing = false
-
     @JvmName("setListener1")
     fun setListener(listener: PopSpinnerItemClickListener<T>) {
         this.listener = listener
@@ -74,6 +69,7 @@ class PopSpinner<T> : LinearLayout {
         init()
     }
 
+
     private fun init() {
         val mInflater = LayoutInflater.from(mcontext)
         view = mInflater.inflate(R.layout.layout_pop_spinner, null)
@@ -89,7 +85,9 @@ class PopSpinner<T> : LinearLayout {
             override fun onItemSelected(position: Int, t: T, value: String) {
                 tvValue.text = value
                 listener?.onItemSelected(position, t, value)
+                dismiss()
             }
+
             override fun setContent(t: T): String {
                 val value = listener?.setContent(t)
                 return value ?: ""
@@ -126,12 +124,11 @@ class PopSpinner<T> : LinearLayout {
      * 自定义的 MySpinner 被点击
      */
     private val spinnerOnClickListener = OnClickListener {
-        isShowing = if (isShowing) {
+        val isShowing = mSpinerPopWindow.isShowing
+       if (isShowing) {
             dismiss()
-            false
         } else {
             showSpinWindow()
-            true
         }
     }
 
@@ -152,7 +149,9 @@ class PopSpinner<T> : LinearLayout {
     }
 
     fun dismiss() {
-        this.mSpinerPopWindow.dismiss()
+        if (mSpinerPopWindow.isShowing) {
+            this.mSpinerPopWindow.dismiss()
+        }
     }
 
 }
